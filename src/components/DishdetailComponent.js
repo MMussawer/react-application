@@ -1,49 +1,71 @@
 import React from "react";
 import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
 
-const Dishdetail = ({ dish }) => {
-  if (dish === null) {
-    return null;
-  }
+//   componentDidMount() {
+//     console.log("DishDetail Component componentDidMount invoked.");
+//   }
 
-  const renderComments = (comments) => {
-    const list = !comments
-      ? "no comments yet"
-      : comments.map((item) => {
-          return (
-            <li key={item.id}>
-              <div>{item.comment}</div>
-              <div>
-                {item.author}, {item.date}
-              </div>
-            </li>
-          );
-        });
+//   componentDidUpdate() {
+//     console.log("DishDetail Component componentDidUpdate invoked.");
+//   }
 
-    return (
-      <div>
-        <h4>Comments</h4>
-        <ul className="list-unstyled">{list}</ul>
-      </div>
-    );
-  };
-
+function RenderDish({ dish }) {
   return (
-    <div className="row">
-      <div className="col-md-5 m-1">
-        <Card>
-          <CardImg width="100%" src={dish.image} alt={dish.name} />
-          <CardBody>
-            <CardTitle>
-              <h4>{dish.name}</h4>
-            </CardTitle>
-            <CardText>{dish.description}</CardText>
-          </CardBody>
-        </Card>
-      </div>
-      <div className="col-md-5 m-1">{renderComments(dish.comments)}</div>
+    <div className="col-sm-5 md-5 m-1">
+      <Card top src={dish.image} alt={dish.name}>
+        <CardBody>
+          <CardTitle>{dish.name}</CardTitle>
+          <CardText>{dish.description}</CardText>
+        </CardBody>
+      </Card>
     </div>
   );
+}
+
+function RenderComments({ comments }) {
+  if (comments != null) {
+    return (
+      <div className="col-sm-5 md-5 m-1">
+        <h4>Comments</h4>
+        <ul className="list unstyled">
+          {comments.map((comment) => {
+            return (
+              <li key={comment.id}>
+                <p>{comment.comment}</p>
+                <p>
+                  -- {comment.author},{" "}
+                  {new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                  }).format(new Date(Date.parse(comment.date)))}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
+}
+
+const DishDetail = (props) => {
+  // console.log("DishDetail Component componentDidMount render invoked.");
+
+  if (props.dish != null) {
+    return (
+      <div className="container">
+        <div className="row">
+          <RenderDish dish={props.dish} />
+          <RenderComments comments={props.dish.comments} />
+        </div>
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
-export default Dishdetail;
+export default DishDetail;
