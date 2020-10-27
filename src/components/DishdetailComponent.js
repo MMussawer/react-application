@@ -1,14 +1,6 @@
 import React from "react";
 import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
 
-//   componentDidMount() {
-//     console.log("DishDetail Component componentDidMount invoked.");
-//   }
-
-//   componentDidUpdate() {
-//     console.log("DishDetail Component componentDidUpdate invoked.");
-//   }
-
 function RenderDish({ dish }) {
   return (
     <div className="col-sm-5 md-5 m-1">
@@ -52,8 +44,6 @@ function RenderComments({ comments }) {
 }
 
 const DishDetail = (props) => {
-  // console.log("DishDetail Component componentDidMount render invoked.");
-
   if (props.dish != null) {
     return (
       <div className="container">
