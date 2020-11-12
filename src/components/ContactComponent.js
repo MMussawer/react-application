@@ -134,7 +134,6 @@ class Contact extends Component {
                                                 isNumber: "Must be a number" 
                                             }}
                                             />
-
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -191,7 +190,6 @@ class Contact extends Component {
                                         <Button type="submit" color="primary">
                                             Send Feedback
                                         </Button>
-                                        
                                     </Col>
                                 </Row>
                             </LocalForm>
